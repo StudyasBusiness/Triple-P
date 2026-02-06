@@ -3,1328 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triple P Squad | Pray • Play • Progress</title>
+    <title>Triple P Squad | Premium Digital Collective</title>
+    
+    <!-- FONTS: Syne (Headlines) & Inter (Body) for that Premium Look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ANIMATION LIBRARY (AOS) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
-        /* CSS Reset and Base Styles */
+        /* --- 1. BRAND IDENTITY & VARIABLES --- */
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #7c3aed;
-            --accent: #06b6d4;
-            --text: #1e293b;
-            --text-light: #64748b;
-            --bg: #f8fafc;
-            --glass-bg: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.18);
-            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            --transition: all 0.3s ease;
+            --neon-lime: #DFFF75;    /* Your Brand Accent */
+            --deep-olive: #7A8F3F;   /* Muted Secondary */
+            --dark-forest: #103120;  /* Background Depth */
+            --void-black: #050505;   /* Premium Off-Black */
+            --card-bg: rgba(26, 26, 26, 0.6); /* Glass Effect */
+            --white: #FFFFFF;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        /* --- 2. GLOBAL RESET & BASE STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background: var(--bg);
+            background-color: var(--void-black);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Background Glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -20%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, var(--dark-forest) 0%, transparent 70%);
+            opacity: 0.6;
+            z-index: -1;
+            filter: blur(80px);
         }
 
         h1, h2, h3, h4 {
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 1.1;
         }
 
-        p {
-            margin-bottom: 1rem;
-        }
+        a { text-decoration: none; color: inherit; transition: 0.4s ease; }
+        ul { list-style: none; }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            border-radius: 2px;
-        }
-
-        .btn {
+        /* --- 3. PREMIUM UI COMPONENTS --- */
+        
+        /* The Neon Button */
+        .btn-neon {
             display: inline-block;
-            padding: 0.8rem 1.8rem;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
+            padding: 16px 40px;
+            background: transparent;
+            color: var(--neon-lime);
+            border: 1px solid var(--neon-lime);
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
             position: relative;
             overflow: hidden;
+            z-index: 1;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            box-shadow: 0 4px 15px 0 rgba(37, 99, 235, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px 0 rgba(37, 99, 235, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn::before {
+        .btn-neon::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background: var(--neon-lime);
+            z-index: -1;
+            transition: 0.4s ease;
         }
 
-        .btn:hover::before {
-            left: 100%;
+        .btn-neon:hover {
+            color: var(--dark-forest);
+            box-shadow: 0 0 20px rgba(223, 255, 117, 0.4);
+        }
+        
+        .btn-neon:hover::after { width: 100%; }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(90deg, #ffffff, var(--neon-lime));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* Glassmorphism Elements */
-        .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-        }
-
-        .glass-card {
-            padding: 2rem;
-            transition: var(--transition);
-        }
-
-        .glass-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px 0 rgba(31, 38, 135, 0.2);
-        }
-
-        /* Header Styles */
-        header {
+        /* --- 4. NAVIGATION (GLASSMORPHISM) --- */
+        nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: var(--transition);
-        }
-
-        header.scrolled {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar {
+            top: 0; width: 100%;
+            padding: 20px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(15px);
+            background: rgba(5, 5, 5, 0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 700;
             font-size: 1.5rem;
+            font-weight: 800;
+            font-family: 'Syne', sans-serif;
+            letter-spacing: -1px;
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
+        .logo span { color: var(--neon-lime); }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { font-size: 0.9rem; font-weight: 600; opacity: 0.7; }
+        .nav-links a:hover { opacity: 1; color: var(--neon-lime); }
 
-        .nav-link {
-            font-weight: 500;
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text);
-        }
-
-        /* Hero Section */
+        /* --- 5. HERO SECTION --- */
         .hero {
             height: 100vh;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .hero-content {
             text-align: center;
-            color: white;
-            z-index: 2;
             position: relative;
-            max-width: 800px;
-            margin: 0 auto;
+            padding: 0 20px;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 1s ease;
+            font-size: clamp(3rem, 10vw, 8rem); /* Massive Responsive Text */
+            margin-bottom: 20px;
+            letter-spacing: -3px;
         }
 
         .hero p {
             font-size: 1.2rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.2s both;
+            max-width: 600px;
+            color: #aaa;
+            margin-bottom: 50px;
+            font-weight: 300;
         }
 
-        .hero-btns {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
-
-        .hero-bg {
+        .scroll-indicator {
             position: absolute;
-            top: 0;
-            left: 0;
+            bottom: 40px;
+            animation: bounce 2s infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* --- 6. TICKER TAPE --- */
+        .ticker-wrap {
             width: 100%;
-            height: 100%;
-            z-index: 1;
+            overflow: hidden;
+            background: var(--neon-lime);
+            padding: 15px 0;
+            transform: rotate(-2deg) scale(1.05);
         }
 
-        .hero-bg-item {
+        .ticker {
+            display: flex;
+            white-space: nowrap;
+            animation: ticker 20s linear infinite;
+        }
+
+        .ticker-item {
+            color: var(--dark-forest);
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin: 0 40px;
+            text-transform: uppercase;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- 7. CEO SPOTLIGHT (Complex Layout) --- */
+        .ceo-section {
+            padding: 150px 10%;
+            position: relative;
+        }
+
+        .ceo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .ceo-image-wrapper {
+            position: relative;
+        }
+
+        .ceo-img {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background: #222; /* Placeholder color */
+            border-radius: 4px;
+            filter: grayscale(100%);
+            transition: 0.5s;
+            object-fit: cover;
+            border: 1px solid rgba(223, 255, 117, 0.2);
+            /* PLACE YASIR's IMAGE HERE */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        .ceo-image-wrapper:hover .ceo-img {
+            filter: grayscale(0%);
+            border-color: var(--neon-lime);
+        }
+
+        .ceo-image-wrapper::before {
+            content: '';
             position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            animation: float 6s ease-in-out infinite;
+            top: 20px; left: -20px;
+            width: 100%; height: 100%;
+            border: 2px solid var(--deep-olive);
+            z-index: -1;
+            transition: 0.5s;
         }
 
-        .hero-bg-item:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
+        .ceo-image-wrapper:hover::before {
+            top: 10px; left: -10px;
+            border-color: var(--neon-lime);
         }
 
-        .hero-bg-item:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 60%;
-            left: 80%;
-            animation-delay: 1s;
+        .ceo-content h2 { font-size: 3rem; margin-bottom: 10px; }
+        .ceo-role { color: var(--neon-lime); font-family: 'Inter', sans-serif; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 30px; display: block;}
+        
+        .ceo-content p {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 40px;
         }
 
-        .hero-bg-item:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            top: 80%;
-            left: 20%;
-            animation-delay: 2s;
+        /* --- 8. THE 3 P's (Card Grid) --- */
+        .values-section {
+            padding: 100px 5%;
         }
 
-        .hero-bg-item:nth-child(4) {
-            width: 100px;
-            height: 100px;
-            top: 30%;
-            left: 70%;
-            animation-delay: 3s;
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
         }
+        
+        .section-header h2 { font-size: 3rem; }
 
-        /* Values Section */
-        .values-grid {
+        .grid-3 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .value-card {
-            text-align: center;
-            padding: 2.5rem 1.5rem;
-        }
-
-        .value-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-        }
-
-        /* Events Section */
-        .events-slider {
-            display: flex;
-            gap: 1.5rem;
-            overflow-x: auto;
-            padding: 1rem 0;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary) transparent;
-        }
-
-        .events-slider::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .events-slider::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .events-slider::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 4px;
-        }
-
-        .event-card {
-            min-width: 300px;
-            flex-shrink: 0;
-        }
-
-        .event-img {
-            height: 200px;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            position: relative;
-        }
-
-        .event-date {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 16px;
-            overflow: hidden;
-            height: 400px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-        }
-
-        .pillars-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .pillar-card {
-            text-align: center;
-        }
-
-        /* Team Section */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .team-card {
-            text-align: center;
-        }
-
-        .team-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            overflow: hidden;
-        }
-
-        /* Programs Section */
-        .programs-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .tab-btn.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .program-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        /* Admissions Section */
-        .steps {
-            display: flex;
-            justify-content: space-between;
-            margin: 3rem 0;
-            position: relative;
-        }
-
-        .steps::before {
-            content: '';
-            position: absolute;
-            top: 40px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--primary);
-            z-index: -1;
-        }
-
-        .step {
-            text-align: center;
-            position: relative;
-            flex: 1;
-        }
-
-        .step-number {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0 auto 1rem;
-        }
-
-        .faq-item {
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .faq-question {
-            padding: 1.5rem;
-            background: var(--glass-bg);
+            background: var(--card-bg);
+            padding: 50px 30px;
+            border: 1px solid rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-        }
-
-        .faq-answer {
-            padding: 0 1.5rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .faq-item.active .faq-answer {
-            padding: 1.5rem;
-            max-height: 500px;
-        }
-
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            background: rgba(255, 255, 255, 0.8);
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        /* Gallery Section */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
-        }
-
-        .gallery-item {
-            border-radius: 12px;
-            overflow: hidden;
-            height: 200px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: 0.4s;
             position: relative;
-            cursor: pointer;
-            transition: var(--transition);
+            overflow: hidden;
         }
 
-        .gallery-item:hover {
-            transform: scale(1.05);
+        .value-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--neon-lime);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
         }
 
-        /* Footer */
-        footer {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 4rem 0 2rem;
+        .value-card h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--white);
         }
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .footer-links h3 {
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-
-        .footer-links h3::after {
-            content: '';
+        .value-card .num {
+            font-size: 4rem;
+            color: rgba(255,255,255,0.05);
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: white;
+            top: 10px; right: 20px;
+            font-weight: 900;
+            font-family: 'Syne', sans-serif;
         }
 
-        .footer-links ul li {
-            margin-bottom: 0.8rem;
+        .value-card p { color: #aaa; }
+
+        /* --- 9. CONTACT / FOOTER --- */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 80px 5% 40px;
+            text-align: center;
+            background: linear-gradient(0deg, #000 0%, var(--dark-forest) 100%);
         }
 
-        .footer-links ul li a:hover {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
+        .footer-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
         }
 
         .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 80px;
+            font-size: 0.8rem;
+            color: #555;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 20px;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            .steps {
-                flex-direction: column;
-                gap: 2rem;
-            }
-
-            .steps::before {
-                display: none;
-            }
-
-            .step::before {
-                content: '';
-                position: absolute;
-                top: 40px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 2px;
-                height: 40px;
-                background: var(--primary);
-            }
-
-            .step:last-child::before {
-                display: none;
-            }
-        }
-
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: var(--glass-bg);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 2rem;
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: var(--transition);
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            }
-
-            .nav-links.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-btns {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 250px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            section {
-                padding: 3rem 0;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .glass-card {
-                padding: 1.5rem;
-            }
+            .ceo-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3.5rem; }
+            .nav-links { display: none; } /* Add JS hamburger menu for real prod */
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <a href="#" class="logo">
-                    <div class="logo-icon">P³</div>
-                    <span>Triple P Squad</span>
-                </a>
-                <ul class="nav-links">
-                    <li><a href="#home" class="nav-link">Home</a></li>
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#programs" class="nav-link">Programs</a></li>
-                    <li><a href="#admissions" class="nav-link">Admissions</a></li>
-                    <li><a href="#media" class="nav-link">Media</a></li>
-                    <li><a href="#contact" class="nav-link">Get Involved</a></li>
-                </ul>
-                <button class="mobile-menu-btn">☰</button>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-bg">
-            <div class="hero-bg-item"></div>
-            <div class="hero-bg-item"></div>
-            <div class="hero-bg-item"></div>
-            <div class="hero-bg-item"></div>
+    <!-- NAV -->
+    <nav>
+        <div class="logo">TRIPLE<span class="text-lime">P</span>.</div>
+        <div class="nav-links">
+            <a href="#">The Squad</a>
+            <a href="#">Projects</a>
+            <a href="#">Vision</a>
         </div>
-        <div class="container">
-            <div class="hero-content">
-                <h1>Pray • Play • Progress</h1>
-                <p>Your Journey to a Purpose-Driven Life</p>
-                <div class="hero-btns">
-                    <a href="#admissions" class="btn btn-primary">Join the Movement</a>
-                    <a href="#about" class="btn btn-secondary">Learn More</a>
-                </div>
+        <a href="#contact" style="color: var(--neon-lime); font-weight: 700;">GET IN TOUCH</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div data-aos="fade-up" data-aos-duration="1000">
+            <h1 class="text-gradient">DOMINATE<br>THE DIGITAL.</h1>
+            <p>The premium collective for Esports, Tech, and Design.</p>
+            <br>
+            <a href="#about" class="btn-neon">ENTER THE SQUAD</a>
+        </div>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <!-- TICKER TAPE ANIMATION -->
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker-item">TRIPLE P SQUAD</div>
+            <div class="ticker-item">///</div>
+            <div class="ticker-item">PASSION</div>
+            <div class="ticker-item">///</div>
+            <div class="ticker-item">POWER</div>
+            <div class="ticker-item">///</div>
+            <div class="ticker-item">PRECISION</div>
+            <div class="ticker-item">///</div>
+            <div class="ticker-item">EST. 2024</div>
+            <div class="ticker-item">///</div>
+            <div class="ticker-item">YASIR SAFI</div>
+        </div>
+    </div>
+
+    <!-- CEO SECTION -->
+    <section class="ceo-section" id="about">
+        <div class="ceo-grid">
+            <div class="ceo-image-wrapper" data-aos="fade-right">
+                <!-- REPLACE 'src' with actual photo URL -->
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Yasir Safi CEO" class="ceo-img">
+            </div>
+            <div class="ceo-content" data-aos="fade-left">
+                <span class="ceo-role">CEO / FOUNDER / MANAGER</span>
+                <h2>YASIR <span class="text-gradient">SAFI</span></h2>
+                <p>Triple P Squad isn't just a team; it's a standard. We operate at the intersection of high-performance gaming and strategic digital branding.</p>
+                <p>We don't settle for participation. We aim for total market saturation and victory. This is the new era of identity.</p>
+                <a href="#" style="border-bottom: 1px solid var(--neon-lime); padding-bottom: 5px;">Read Full Bio →</a>
             </div>
         </div>
     </section>
 
-    <!-- Values Section -->
-    <section id="values">
-        <div class="container">
-            <h2 class="section-title">Our Core Values</h2>
-            <div class="values-grid">
-                <div class="glass-card value-card">
-                    <div class="value-icon">🙏</div>
-                    <h3>Pray</h3>
-                    <p>Build your character from within through spiritual growth, Seerah study, and personal connection with Allah ﷻ.</p>
-                </div>
-                <div class="glass-card value-card">
-                    <div class="value-icon">⚽</div>
-                    <h3>Play</h3>
-                    <p>Unleash your potential with adventure, sports, and brotherhood. Develop resilience and teamwork through outdoor activities.</p>
-                </div>
-                <div class="glass-card value-card">
-                    <div class="value-icon">📈</div>
-                    <h3>Progress</h3>
-                    <p>Master life skills and prepare for a future with purpose through workshops, mentorship, and personal development.</p>
-                </div>
+    <!-- VALUES SECTION -->
+    <section class="values-section">
+        <div class="section-header" data-aos="fade-up">
+            <h2>THE <span style="color: var(--neon-lime);">TRIPLE P</span> CODE</h2>
+        </div>
+        <div class="grid-3">
+            <div class="value-card" data-aos="fade-up" data-aos-delay="100">
+                <span class="num">01</span>
+                <h3>PRECISION</h3>
+                <p>Calculated moves. Whether in code or in game, every action is deliberate. Zero bugs. Zero errors.</p>
+            </div>
+            <div class="value-card" data-aos="fade-up" data-aos-delay="200">
+                <span class="num">02</span>
+                <h3>PERFORMANCE</h3>
+                <p>High voltage results. We push the limits of what is visually and technically possible.</p>
+            </div>
+            <div class="value-card" data-aos="fade-up" data-aos-delay="300">
+                <span class="num">03</span>
+                <h3>PRESTIGE</h3>
+                <p>An elite status. Triple P Squad represents a branding identity that is instantly recognizable and respected.</p>
             </div>
         </div>
     </section>
 
-    <!-- Events Section -->
-    <section id="events">
-        <div class="container">
-            <h2 class="section-title">Featured Events</h2>
-            <div class="events-slider">
-                <div class="glass-card event-card">
-                    <div class="event-img">
-                        <div class="event-date">June 15</div>
-                    </div>
-                    <h3>Seerah Quiz Session</h3>
-                    <p>Test your knowledge of the Prophet's life in this engaging quiz competition with prizes for winners.</p>
-                    <a href="#" class="btn btn-secondary" style="margin-top: 1rem;">Learn More</a>
-                </div>
-                <div class="glass-card event-card">
-                    <div class="event-img">
-                        <div class="event-date">June 22</div>
-                    </div>
-                    <h3>Weekend Hike Adventure</h3>
-                    <p>Join us for a challenging hike through scenic trails, building endurance and brotherhood.</p>
-                    <a href="#" class="btn btn-secondary" style="margin-top: 1rem;">Learn More</a>
-                </div>
-                <div class="glass-card event-card">
-                    <div class="event-img">
-                        <div class="event-date">July 5</div>
-                    </div>
-                    <h3>Leadership Workshop</h3>
-                    <p>Develop essential leadership skills through interactive activities and real-world scenarios.</p>
-                    <a href="#" class="btn btn-secondary" style="margin-top: 1rem;">Learn More</a>
-                </div>
-                <div class="glass-card event-card">
-                    <div class="event-img">
-                        <div class="event-date">July 20</div>
-                    </div>
-                    <h3>Community Service Day</h3>
-                    <p>Give back to the community through environmental cleanup and outreach activities.</p>
-                    <a href="#" class="btn btn-secondary" style="margin-top: 1rem;">Learn More</a>
-                </div>
-            </div>
+    <!-- FOOTER / CONTACT -->
+    <footer id="contact">
+        <div class="footer-cta" data-aos="zoom-in">
+            <h2>READY TO <span class="text-gradient">ELEVATE?</span></h2>
+            <a href="mailto:contact@triplep.com" class="btn-neon">START PROJECT</a>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">About Us</h2>
-            <div class="about-content">
-                <div class="about-img"></div>
-                <div class="about-text">
-                    <h3>Our Story</h3>
-                    <p>Triple P Squad began as a platform for positive youth development in Pakistan under Al-Burhan. We recognized the need for a holistic approach to nurturing young Muslims who are grounded in faith, physically active, and equipped with practical life skills.</p>
-                    <p>Our mission is to develop well-rounded individuals who can navigate the challenges of modern life while staying true to Islamic values and principles.</p>
-                    <a href="#programs" class="btn btn-primary" style="margin-top: 1.5rem;">Explore Our Programs</a>
-                </div>
-            </div>
-
-            <div class="pillars-section" style="margin-top: 5rem;">
-                <h3 class="section-title">Our Three Pillars</h3>
-                <div class="pillars-grid">
-                    <div class="glass-card pillar-card">
-                        <h4>Pray</h4>
-                        <p>Faith-building through regular prayers, Seerah study circles, and spiritual reflection sessions that help strengthen our connection with Allah ﷻ.</p>
-                    </div>
-                    <div class="glass-card pillar-card">
-                        <h4>Play</h4>
-                        <p>Resilience & teamwork through outdoor sports, adventure activities, martial arts, and recreational games that build physical and mental strength.</p>
-                    </div>
-                    <div class="glass-card pillar-card">
-                        <h4>Progress</h4>
-                        <p>Life skills training including problem-solving, career counseling, financial literacy, and leadership development for a successful future.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Programs Section -->
-    <section id="programs">
-        <div class="container">
-            <h2 class="section-title">Programs & Activities</h2>
-            <div class="programs-tabs">
-                <button class="tab-btn active" data-tab="spiritual">Spiritual Development</button>
-                <button class="tab-btn" data-tab="sports">Adventure & Sports</button>
-                <button class="tab-btn" data-tab="skills">Skill-Building</button>
-                <button class="tab-btn" data-tab="mentorship">Mentorship</button>
-            </div>
-
-            <div class="tab-content active" id="spiritual">
-                <div class="program-grid">
-                    <div class="glass-card">
-                        <h3>Seerah Circles</h3>
-                        <p>Weekly study sessions exploring the life of Prophet Muhammad ﷺ and drawing practical lessons for modern challenges.</p>
-                    </div>
-                    <div class="glass-card">
-                        <h3>Tarbiyah Sessions</h3>
-                        <p>Character development programs focused on Islamic ethics, manners, and personal growth.</p>
-                    </div>
-                    <div class="glass-card">
-                        <h3>Quran Reflection</h3>
-                        <p>Understanding the message of the Quran through group discussions and reflection activities.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="sports">
-                <div class="program-grid">
-                    <div class="glass-card">
-                        <h3>Football & Cricket</h3>
-                        <p>Regular team sports to build coordination, sportsmanship, and physical fitness.</p>
-                    </div>
-                    <div class="glass-card">
-                        <h3>Martial Arts</h3>
-                        <p>Self-defense training that builds discipline, confidence, and physical resilience.</p>
-                    </div>
-                    <div class="glass-card">
-                        <h3>Hiking & Adventure</h3>
-                        <p>Outdoor expeditions that challenge limits and foster appreciation for nature.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="skills">
-                <div class="program-grid">
-                    <div class="glass-card">
-                        <h3>Tech Workshops</h3>
-                        <p>Hands-on sessions in coding, digital skills, and technology applications.</p>
-                    </div>
-                    <div class="glass-card">
-                        <h3>Financial Literacy</h3>
-                        <p>Understanding personal finance, budgeting, and Islamic financial principles.</p>
-                    </div>
-                    <div class="glass-card">
-                        <h3>Public Speaking</h3>
-                        <p>Building confidence and communication skills through practice and feedback.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="mentorship">
-                <div class="program-grid">
-                    <div class="glass-card">
-                        <h3>One-on-One Guidance</h3>
-                        <p>Personalized mentorship sessions with experienced mentors (Murabbi).</p>
-                    </div>
-                    <div class="glass-card">
-                        <h3>Small Group Circles</h3>
-                        <p>Intimate settings for guided reflection, sharing, and personal growth.</p>
-                    </div>
-                    <div class="glass-card">
-                        <h3>Career Counseling</h3>
-                        <p>Guidance on educational paths, career choices, and professional development.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Admissions Section -->
-    <section id="admissions">
-        <div class="container">
-            <h2 class="section-title">Admissions</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Check Eligibility</h3>
-                    <p>Ages 12-18, commitment to program values</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Submit Application</h3>
-                    <p>Complete the online registration form</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Join the Squad</h3>
-                    <p>Welcome session and orientation</p>
-                </div>
-            </div>
-
-            <div class="form-section" style="margin-top: 4rem;">
-                <h3 class="section-title">Registration Form</h3>
-                <div class="glass-card">
-                    <form id="registration-form">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Full Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email Address" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" class="form-control" placeholder="Phone Number" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="number" class="form-control" placeholder="Age" min="12" max="18" required>
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control" required>
-                                <option value="" disabled selected>Select Your City</option>
-                                <option value="karachi">Karachi</option>
-                                <option value="islamabad">Islamabad</option>
-                                <option value="lahore">Lahore</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" placeholder="Why do you want to join Triple P Squad?" rows="4"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Application</button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="faq-section" style="margin-top: 5rem;">
-                <h3 class="section-title">Frequently Asked Questions</h3>
-                <div class="faq-list">
-                    <div class="glass-card faq-item">
-                        <div class="faq-question">
-                            <span>What is the time commitment?</span>
-                            <span>+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>The program requires attendance at Sunday sessions (4-6 hours) and occasional weekend activities. We understand academic commitments and offer flexibility when needed.</p>
-                        </div>
-                    </div>
-                    <div class="glass-card faq-item">
-                        <div class="faq-question">
-                            <span>Is there a registration fee?</span>
-                            <span>+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Yes, there is a one-time registration fee of PKR 2,000 which covers administrative costs and program materials. Financial assistance is available for those in need.</p>
-                        </div>
-                    </div>
-                    <div class="glass-card faq-item">
-                        <div class="faq-question">
-                            <span>Where are the sessions held?</span>
-                            <span>+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>We have centers in Karachi, Islamabad, and Lahore. Specific locations vary based on activities - indoor sessions at our centers, outdoor activities at designated parks and facilities.</p>
-                        </div>
-                    </div>
-                    <div class="glass-card faq-item">
-                        <div class="faq-question">
-                            <span>What safety measures are in place?</span>
-                            <span>+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>All activities are supervised by trained mentors. We maintain appropriate staff-to-youth ratios, conduct background checks on all volunteers, and follow strict safety protocols for all physical activities.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Media Section -->
-    <section id="media">
-        <div class="container">
-            <h2 class="section-title">Media & Gallery</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title">Get Involved</h2>
-            <div class="contact-content">
-                <div class="glass-card" style="margin-bottom: 2rem;">
-                    <h3>Volunteer as a Mentor</h3>
-                    <p>Join our team of dedicated mentors and make a difference in young lives. We're looking for passionate individuals with expertise in various fields who can guide our youth.</p>
-                    <a href="#contact-form" class="btn btn-primary" style="margin-top: 1rem;">Apply as Mentor</a>
-                </div>
-
-                <div class="contact-form" id="contact-form">
-                    <h3 class="section-title">Contact Us</h3>
-                    <div class="glass-card">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Your Name" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Your Email" required>
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control" required>
-                                    <option value="" disabled selected>Select Subject</option>
-                                    <option value="general">General Inquiry</option>
-                                    <option value="mentor">Mentor Application</option>
-                                    <option value="registration">Registration Question</option>
-                                    <option value="partnership">Partnership Opportunity</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" placeholder="Your Message" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <div class="footer-logo">
-                        <div class="logo-icon">P³</div>
-                        <span>Triple P Squad</span>
-                    </div>
-                    <p>Pray • Play • Progress: Your Journey to a Purpose-Driven Life. A youth development initiative by Al-Burhan.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link">f</a>
-                        <a href="#" class="social-link">in</a>
-                        <a href="#" class="social-link">ig</a>
-                        <a href="#" class="social-link">yt</a>
-                    </div>
-                </div>
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#programs">Programs</a></li>
-                        <li><a href="#admissions">Admissions</a></li>
-                        <li><a href="#media">Media</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h3>Programs</h3>
-                    <ul>
-                        <li><a href="#programs">Spiritual Development</a></li>
-                        <li><a href="#programs">Adventure & Sports</a></li>
-                        <li><a href="#programs">Skill-Building</a></li>
-                        <li><a href="#programs">Mentorship</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h3>Contact Info</h3>
-                    <ul>
-                        <li>Email: info@triplepsquad.org</li>
-                        <li>Phone: +92 300 123 4567</li>
-                        <li>Karachi • Islamabad • Lahore</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 Triple P Squad. All rights reserved. Powered by Al-Burhan.</p>
-            </div>
+        
+        <div class="copyright">
+            <span>&copy; 2024 Triple P Squad.</span>
+            <span>Managed by Yasir Safi</span>
         </div>
     </footer>
 
+    <!-- ANIMATION SCRIPT (AOS) -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Header Scroll Effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // Tab Functionality
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all buttons and contents
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked button
-                btn.classList.add('active');
-                
-                // Show corresponding content
-                const tabId = btn.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
-
-        // FAQ Accordion
-        const faqItems = document.querySelectorAll('.faq-item');
-
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            
-            question.addEventListener('click', () => {
-                // Close all other items
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
-                });
-                
-                // Toggle current item
-                item.classList.toggle('active');
-            });
-        });
-
-        // Form Submission
-        const forms = document.querySelectorAll('form');
-        
-        forms.forEach(form => {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('Thank you for your submission! We will get back to you soon.');
-                form.reset();
-            });
-        });
-
-        // Smooth Scrolling for Anchor Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    navLinks.classList.remove('active');
-                }
-            });
-        });
-
-        // Animate elements on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements to animate
-        document.querySelectorAll('.glass-card, .section-title').forEach(el => {
-            el.style.opacity = '0';
-            observer.observe(el);
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-cubic'
         });
     </script>
 </body>
