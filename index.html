@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triple P Squad | Premium Digital Collective</title>
+    <title>Triple P Squad | Faith. Fitness. Future.</title>
     
-    <!-- FONTS: Syne (Headlines) & Inter (Body) for that Premium Look -->
+    <!-- FONTS: Syne (Headlines - Modern/Fresh) & Inter (Body - Clean) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
@@ -13,18 +13,22 @@
     <!-- ANIMATION LIBRARY (AOS) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+    <!-- ICONS -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
     <style>
-        /* --- 1. BRAND IDENTITY & VARIABLES --- */
+        /* --- 1. BRAND IDENTITY --- */
         :root {
-            --neon-lime: #DFFF75;    /* Your Brand Accent */
-            --deep-olive: #7A8F3F;   /* Muted Secondary */
-            --dark-forest: #103120;  /* Background Depth */
-            --void-black: #050505;   /* Premium Off-Black */
-            --card-bg: rgba(26, 26, 26, 0.6); /* Glass Effect */
+            /* We keep the "Fresh" Lime, but now it represents 'Light/Growth' */
+            --noor-lime: #DFFF75;    
+            --deep-forest: #0a1f14;  /* Slightly greener dark background */
+            --void-black: #020503;   
+            --glass-bg: rgba(255, 255, 255, 0.03); 
             --white: #FFFFFF;
+            --border: rgba(223, 255, 117, 0.2);
         }
 
-        /* --- 2. GLOBAL RESET & BASE STYLES --- */
+        /* --- 2. GLOBAL STYLES --- */
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         
         body {
@@ -35,21 +39,19 @@
             position: relative;
         }
 
-        /* Ambient Background Glow */
+        /* Background Glow (Atmosphere) */
         body::before {
             content: '';
             position: fixed;
-            top: -20%;
-            left: -10%;
-            width: 50vw;
-            height: 50vw;
-            background: radial-gradient(circle, var(--dark-forest) 0%, transparent 70%);
-            opacity: 0.6;
+            top: -20%; right: -10%;
+            width: 60vw; height: 60vw;
+            background: radial-gradient(circle, var(--deep-forest) 0%, transparent 70%);
+            opacity: 0.8;
             z-index: -1;
-            filter: blur(80px);
+            filter: blur(100px);
         }
 
-        h1, h2, h3, h4 {
+        h1, h2, h3 {
             font-family: 'Syne', sans-serif;
             font-weight: 800;
             text-transform: uppercase;
@@ -57,77 +59,57 @@
         }
 
         a { text-decoration: none; color: inherit; transition: 0.4s ease; }
-        ul { list-style: none; }
 
-        /* --- 3. PREMIUM UI COMPONENTS --- */
+        /* --- 3. UI ELEMENTS --- */
         
-        /* The Neon Button */
-        .btn-neon {
-            display: inline-block;
+        /* The "Fresh" Button */
+        .btn-glow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             padding: 16px 40px;
-            background: transparent;
-            color: var(--neon-lime);
-            border: 1px solid var(--neon-lime);
+            background: rgba(223, 255, 117, 0.05);
+            color: var(--noor-lime);
+            border: 1px solid var(--noor-lime);
             font-family: 'Syne', sans-serif;
             font-weight: 700;
             letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: 0.4s;
+            backdrop-filter: blur(5px);
         }
 
-        .btn-neon::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 0%; height: 100%;
-            background: var(--neon-lime);
-            z-index: -1;
-            transition: 0.4s ease;
+        .btn-glow:hover {
+            background: var(--noor-lime);
+            color: var(--void-black);
+            box-shadow: 0 0 30px rgba(223, 255, 117, 0.4);
+            transform: translateY(-3px);
         }
 
-        .btn-neon:hover {
-            color: var(--dark-forest);
-            box-shadow: 0 0 20px rgba(223, 255, 117, 0.4);
-        }
-        
-        .btn-neon:hover::after { width: 100%; }
-
-        /* Gradient Text */
         .text-gradient {
-            background: linear-gradient(90deg, #ffffff, var(--neon-lime));
+            background: linear-gradient(90deg, #fff, var(--noor-lime));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* --- 4. NAVIGATION (GLASSMORPHISM) --- */
+        /* --- 4. HEADER --- */
         nav {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            position: fixed; top: 0; width: 100%;
+            padding: 25px 5%;
+            display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(15px);
-            background: rgba(5, 5, 5, 0.3);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(2, 5, 3, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            font-family: 'Syne', sans-serif;
-            letter-spacing: -1px;
-        }
-
-        .logo span { color: var(--neon-lime); }
+        .logo { font-size: 1.5rem; font-weight: 800; font-family: 'Syne', sans-serif; letter-spacing: -1px; }
+        .logo i { color: var(--noor-lime); margin-right: 5px; }
 
         .nav-links { display: flex; gap: 40px; }
         .nav-links a { font-size: 0.9rem; font-weight: 600; opacity: 0.7; }
-        .nav-links a:hover { opacity: 1; color: var(--neon-lime); }
+        .nav-links a:hover { opacity: 1; color: var(--noor-lime); }
 
-        /* --- 5. HERO SECTION --- */
+        /* --- 5. HERO SECTION (Engaging) --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -135,14 +117,24 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            position: relative;
             padding: 0 20px;
+            position: relative;
+        }
+
+        .bismillah {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            color: var(--noor-lime);
+            margin-bottom: 20px;
+            opacity: 0.8;
+            text-transform: uppercase;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 10vw, 8rem); /* Massive Responsive Text */
-            margin-bottom: 20px;
-            letter-spacing: -3px;
+            font-size: clamp(3rem, 9vw, 7rem);
+            margin-bottom: 30px;
+            letter-spacing: -2px;
         }
 
         .hero p {
@@ -153,192 +145,109 @@
             font-weight: 300;
         }
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            animation: bounce 2s infinite;
-            opacity: 0.5;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-        }
-
-        /* --- 6. TICKER TAPE --- */
+        /* --- 6. SCROLLING TICKER (Modern Vibe) --- */
         .ticker-wrap {
             width: 100%;
             overflow: hidden;
-            background: var(--neon-lime);
-            padding: 15px 0;
-            transform: rotate(-2deg) scale(1.05);
+            background: var(--noor-lime);
+            padding: 12px 0;
+            transform: rotate(-1deg);
+            border-top: 2px solid #fff;
+            border-bottom: 2px solid #fff;
         }
-
-        .ticker {
-            display: flex;
-            white-space: nowrap;
-            animation: ticker 20s linear infinite;
-        }
-
+        .ticker { display: flex; white-space: nowrap; animation: ticker 25s linear infinite; }
         .ticker-item {
-            color: var(--dark-forest);
+            color: var(--void-black);
             font-family: 'Syne', sans-serif;
             font-weight: 800;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             margin: 0 40px;
             text-transform: uppercase;
+            display: flex; align-items: center; gap: 10px;
         }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-        @keyframes ticker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* --- 7. CEO SPOTLIGHT (Complex Layout) --- */
-        .ceo-section {
-            padding: 150px 10%;
-            position: relative;
-        }
-
-        .ceo-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .ceo-image-wrapper {
-            position: relative;
-        }
-
-        .ceo-img {
-            width: 100%;
-            aspect-ratio: 4/5;
-            background: #222; /* Placeholder color */
-            border-radius: 4px;
-            filter: grayscale(100%);
-            transition: 0.5s;
-            object-fit: cover;
-            border: 1px solid rgba(223, 255, 117, 0.2);
-            /* PLACE YASIR's IMAGE HERE */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #555;
-            font-size: 0.8rem;
-        }
-
-        .ceo-image-wrapper:hover .ceo-img {
-            filter: grayscale(0%);
-            border-color: var(--neon-lime);
-        }
-
-        .ceo-image-wrapper::before {
-            content: '';
-            position: absolute;
-            top: 20px; left: -20px;
-            width: 100%; height: 100%;
-            border: 2px solid var(--deep-olive);
-            z-index: -1;
-            transition: 0.5s;
-        }
-
-        .ceo-image-wrapper:hover::before {
-            top: 10px; left: -10px;
-            border-color: var(--neon-lime);
-        }
-
-        .ceo-content h2 { font-size: 3rem; margin-bottom: 10px; }
-        .ceo-role { color: var(--neon-lime); font-family: 'Inter', sans-serif; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 30px; display: block;}
+        /* --- 7. THE 3 P's (Islamic Context) --- */
+        .pillars { padding: 120px 5%; }
         
-        .ceo-content p {
-            color: #ccc;
-            line-height: 1.8;
-            margin-bottom: 40px;
-        }
-
-        /* --- 8. THE 3 P's (Card Grid) --- */
-        .values-section {
-            padding: 100px 5%;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
+        .section-title h2 { font-size: 3rem; text-align: center; margin-bottom: 80px; }
         
-        .section-header h2 { font-size: 3rem; }
-
-        .grid-3 {
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
-        .value-card {
-            background: var(--card-bg);
-            padding: 50px 30px;
-            border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            transition: 0.4s;
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 4px;
             position: relative;
+            transition: 0.4s;
             overflow: hidden;
         }
 
-        .value-card:hover {
-            transform: translateY(-15px);
-            border-color: var(--neon-lime);
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+        .glass-card:hover {
+            border-color: var(--noor-lime);
+            background: linear-gradient(180deg, rgba(223, 255, 117, 0.05) 0%, transparent 100%);
+            transform: translateY(-10px);
         }
 
-        .value-card h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: var(--white);
-        }
-
-        .value-card .num {
-            font-size: 4rem;
-            color: rgba(255,255,255,0.05);
-            position: absolute;
-            top: 10px; right: 20px;
-            font-weight: 900;
-            font-family: 'Syne', sans-serif;
-        }
-
-        .value-card p { color: #aaa; }
-
-        /* --- 9. CONTACT / FOOTER --- */
-        footer {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding: 80px 5% 40px;
-            text-align: center;
-            background: linear-gradient(0deg, #000 0%, var(--dark-forest) 100%);
-        }
-
-        .footer-cta h2 {
+        .card-icon {
             font-size: 2.5rem;
-            margin-bottom: 30px;
+            color: var(--noor-lime);
+            margin-bottom: 20px;
         }
 
-        .copyright {
-            margin-top: 80px;
-            font-size: 0.8rem;
-            color: #555;
+        .glass-card h3 { font-size: 2rem; margin-bottom: 15px; }
+        .glass-card p { color: #bbb; line-height: 1.7; font-size: 0.95rem; }
+
+        /* --- 8. LEADER SECTION --- */
+        .leader-section {
+            padding: 100px 5%;
+            background: linear-gradient(to right, var(--void-black), var(--deep-forest));
             display: flex;
-            justify-content: space-between;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .leader-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1200px;
+            align-items: center;
         }
 
-        /* --- RESPONSIVE --- */
+        .leader-img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--noor-lime);
+            filter: grayscale(100%);
+            transition: 0.5s;
+        }
+        .leader-img:hover { filter: grayscale(0%); }
+
+        .leader-content span { color: var(--noor-lime); letter-spacing: 2px; font-weight: 600; font-size: 0.9rem; }
+        .leader-content h2 { font-size: 3.5rem; margin: 15px 0 30px; }
+        .leader-content p { color: #ccc; margin-bottom: 30px; line-height: 1.8; }
+
+        /* --- 9. FOOTER --- */
+        footer {
+            padding: 80px 5%;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: #777;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .ceo-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 3.5rem; }
-            .nav-links { display: none; } /* Add JS hamburger menu for real prod */
+            .leader-box { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -346,104 +255,109 @@
 
     <!-- NAV -->
     <nav>
-        <div class="logo">TRIPLE<span class="text-lime">P</span>.</div>
+        <div class="logo"><i class="ph-fill ph-moon-stars"></i> TRIPLE P.</div>
         <div class="nav-links">
-            <a href="#">The Squad</a>
-            <a href="#">Projects</a>
-            <a href="#">Vision</a>
+            <a href="#vision">The Vision</a>
+            <a href="#pillars">The 3 Pillars</a>
+            <a href="#leader">Leadership</a>
         </div>
-        <a href="#contact" style="color: var(--neon-lime); font-weight: 700;">GET IN TOUCH</a>
+        <a href="#join" style="font-weight: 700; color: var(--white); border-bottom: 2px solid var(--noor-lime);">JOIN COMMUNITY</a>
     </nav>
 
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <section class="hero">
         <div data-aos="fade-up" data-aos-duration="1000">
-            <h1 class="text-gradient">DOMINATE<br>THE DIGITAL.</h1>
-            <p>The premium collective for Esports, Tech, and Design.</p>
+            <span class="bismillah">In The Name of Excellence</span>
+            <h1 class="text-gradient">ELEVATE YOUR<br>EXISTENCE.</h1>
+            <p>Triple P Squad is a brotherhood committed to spiritual discipline, physical strength, and worldly progress. Managed by Yasir Safi.</p>
             <br>
-            <a href="#about" class="btn-neon">ENTER THE SQUAD</a>
+            <a href="#join" class="btn-glow">
+                ENTER THE SQUAD <i class="ph-bold ph-arrow-right"></i>
+            </a>
         </div>
-        <div class="scroll-indicator">↓</div>
     </section>
 
-    <!-- TICKER TAPE ANIMATION -->
+    <!-- MODERN TICKER -->
     <div class="ticker-wrap">
         <div class="ticker">
-            <div class="ticker-item">TRIPLE P SQUAD</div>
-            <div class="ticker-item">///</div>
-            <div class="ticker-item">PASSION</div>
-            <div class="ticker-item">///</div>
-            <div class="ticker-item">POWER</div>
-            <div class="ticker-item">///</div>
-            <div class="ticker-item">PRECISION</div>
-            <div class="ticker-item">///</div>
-            <div class="ticker-item">EST. 2024</div>
-            <div class="ticker-item">///</div>
-            <div class="ticker-item">YASIR SAFI</div>
+            <div class="ticker-item"><i class="ph-fill ph-star-four"></i> PRAY</div>
+            <div class="ticker-item"><i class="ph-fill ph-star-four"></i> PLAY</div>
+            <div class="ticker-item"><i class="ph-fill ph-star-four"></i> PROGRESS</div>
+            <div class="ticker-item"><i class="ph-fill ph-star-four"></i> FAITH</div>
+            <div class="ticker-item"><i class="ph-fill ph-star-four"></i> FITNESS</div>
+            <div class="ticker-item"><i class="ph-fill ph-star-four"></i> FUTURE</div>
+            <div class="ticker-item"><i class="ph-fill ph-star-four"></i> TRIPLE P SQUAD</div>
         </div>
     </div>
 
-    <!-- CEO SECTION -->
-    <section class="ceo-section" id="about">
-        <div class="ceo-grid">
-            <div class="ceo-image-wrapper" data-aos="fade-right">
-                <!-- REPLACE 'src' with actual photo URL -->
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Yasir Safi CEO" class="ceo-img">
-            </div>
-            <div class="ceo-content" data-aos="fade-left">
-                <span class="ceo-role">CEO / FOUNDER / MANAGER</span>
-                <h2>YASIR <span class="text-gradient">SAFI</span></h2>
-                <p>Triple P Squad isn't just a team; it's a standard. We operate at the intersection of high-performance gaming and strategic digital branding.</p>
-                <p>We don't settle for participation. We aim for total market saturation and victory. This is the new era of identity.</p>
-                <a href="#" style="border-bottom: 1px solid var(--neon-lime); padding-bottom: 5px;">Read Full Bio →</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- VALUES SECTION -->
-    <section class="values-section">
-        <div class="section-header" data-aos="fade-up">
-            <h2>THE <span style="color: var(--neon-lime);">TRIPLE P</span> CODE</h2>
-        </div>
-        <div class="grid-3">
-            <div class="value-card" data-aos="fade-up" data-aos-delay="100">
-                <span class="num">01</span>
-                <h3>PRECISION</h3>
-                <p>Calculated moves. Whether in code or in game, every action is deliberate. Zero bugs. Zero errors.</p>
-            </div>
-            <div class="value-card" data-aos="fade-up" data-aos-delay="200">
-                <span class="num">02</span>
-                <h3>PERFORMANCE</h3>
-                <p>High voltage results. We push the limits of what is visually and technically possible.</p>
-            </div>
-            <div class="value-card" data-aos="fade-up" data-aos-delay="300">
-                <span class="num">03</span>
-                <h3>PRESTIGE</h3>
-                <p>An elite status. Triple P Squad represents a branding identity that is instantly recognizable and respected.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER / CONTACT -->
-    <footer id="contact">
-        <div class="footer-cta" data-aos="zoom-in">
-            <h2>READY TO <span class="text-gradient">ELEVATE?</span></h2>
-            <a href="mailto:contact@triplep.com" class="btn-neon">START PROJECT</a>
+    <!-- THE 3 PILLARS (Updated Definitions) -->
+    <section class="pillars" id="pillars">
+        <div class="section-title" data-aos="fade-up">
+            <h2>THE <span style="color: var(--noor-lime);">TRIPLE P</span> CODE</h2>
         </div>
         
-        <div class="copyright">
-            <span>&copy; 2024 Triple P Squad.</span>
-            <span>Managed by Yasir Safi</span>
+        <div class="cards-grid">
+            
+            <!-- PRAY -->
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="ph-fill ph-hands-praying card-icon"></i>
+                <h3>01. PRAY</h3>
+                <p><strong>Spiritual Connection.</strong> The foundation of our success is our connection to the Creator. We prioritize Salah, mindfulness, and inner discipline before outward action.</p>
+            </div>
+
+            <!-- PLAY -->
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="ph-fill ph-barbell card-icon"></i>
+                <h3>02. PLAY</h3>
+                <p><strong>Physical Strength.</strong> "The strong believer is better than the weak." We engage in Halal fitness, Sunnah sports, and recreation to build bodies capable of greatness.</p>
+            </div>
+
+            <!-- PROGRESS -->
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="ph-fill ph-trend-up card-icon"></i>
+                <h3>03. PROGRESS</h3>
+                <p><strong>Continuous Growth.</strong> We strive for excellence (Ihsan) in our careers, education, and character. We level up in the Dunya to serve the Ummah.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LEADER SECTION -->
+    <section class="leader-section" id="leader">
+        <div class="leader-box">
+            <div class="leader-img-wrapper" data-aos="fade-right">
+                <!-- Replace with Yasir Safi's Photo -->
+                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Yasir Safi" class="leader-img">
+            </div>
+            <div class="leader-content" data-aos="fade-left">
+                <span>FOUNDER & MANAGER</span>
+                <h2>YASIR <span class="text-gradient">SAFI</span></h2>
+                <p>Triple P Squad was built to break the stereotype that faith and modern success cannot coexist. We are creating a generation of men who are spiritually grounded, physically dangerous, and intellectually sharp.</p>
+                <p>No bugs in our character. No errors in our discipline. Just pure progress.</p>
+                <a href="#contact" class="btn-glow" style="padding: 12px 30px;">
+                    READ MANIFESTO
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div data-aos="zoom-in">
+            <h2 style="color: var(--white); margin-bottom: 20px;">JOIN THE MOVEMENT</h2>
+            <p>Faith. Fitness. Future.</p>
+            <br>
+            <p>&copy; 2024 Triple P Squad. Managed by Yasir Safi.</p>
         </div>
     </footer>
 
-    <!-- ANIMATION SCRIPT (AOS) -->
+    <!-- ANIMATION SCRIPT -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
             duration: 1000,
             once: true,
-            easing: 'ease-out-cubic'
+            easing: 'ease-out-quart'
         });
     </script>
 </body>
